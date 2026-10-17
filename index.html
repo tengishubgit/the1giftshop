@@ -61,12 +61,12 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative overflow-hidden py-24 sm:py-32 px-6 bg-gradient-to-b from-rose-50/30 via-cream to-cream">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
+    <section class="relative overflow-hidden py-20 sm:py-28 px-6 bg-gradient-to-b from-stone-100/60 via-cream to-cream">
+        <div class="max-w-4xl mx-auto text-center relative z-10 mb-14">
             <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight font-heading text-darkText leading-tight mb-6">
                 Өөрийн плейлисийг <br><span class="text-roseAccent">Кассет дээр буулгаарай</span>
             </h1>
-            <p class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed mb-16">
+            <p class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed">
                 Та дуртай дууны жагсаалтаа бидэнд илгээгээрэй. Бид тусгай кассет дээр бичиж, кассет тоглуулагч болон чихэвчний хамт тусгай бэлгийн багц болгон хүргэнэ.
             </p>
         </div>
@@ -170,7 +170,7 @@
                 <p class="text-xs text-stone-400">“The little things mean the most” 🌿</p>
             </div>
             <div class="text-xs text-stone-400">
-                Instagram: <a href="https://instagram.com/the1gift.shop" target="_blank" class="text-roseAccent hover:underline">@the1gift.shop</a>[cite: 1]
+                Instagram: <a href="https://instagram.com/the1gift.shop" target="_blank" class="text-roseAccent hover:underline">@the1gift.shop</a>
             </div>
             <div class="text-xs text-stone-500">
                 © 2026 The1GiftShop. Бүх эрх хуулиар хамгаалагдсан.
@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-roseAccent hover:bg-rose-600 text-white py-4 rounded-2xl font-semibold text-sm shadow-md">
-                    Төлбөр төлөгдсөн баталгаажуулах ✓[cite: 1]
+                    Төлбөр төлөгдсөн баталгаажуулах ✓
                 </button>
             </form>
         </div>
@@ -254,7 +254,7 @@
         let cart = [];
         let wishlist = [];
 
-        // Products Data
+        // Products Data with Images Fully Restored
         const products = [
             { id: 1, name: 'Kodak Point & Shoot Camera', category: 'camera', price: 95000, img: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80' },
             { id: 2, name: 'Y2K Aesthetic Silver Camera', category: 'camera', price: 110000, img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80' },
@@ -421,15 +421,6 @@
                     </div>
                 `).join('');
         }
-
-        (`openCheckoutModal`() {
-            if (cart.length === 0) {
-                alert('Сагс хоосон байна!');
-                return;
-            }
-            toggleCartDrawer();
-            document.getElementById('checkout-modal').classList.remove('hidden');
-        })
 
         function openCheckoutModal() {
             if (cart.length === 0) {
