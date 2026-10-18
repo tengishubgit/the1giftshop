@@ -226,9 +226,9 @@
                         <select id="admin-p-cat" class="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-roseAccent">
                             <option value="camera">Камер (camera)</option>
                             <option value="mp3">MP3 Тоглуулагч (mp3)</option>
-                            <option value="bag">Цүнх (bag - Color options active)</option>
+                            <option value="bag">Цүнх (bag - Өнгийн сонголттой)</option>
                             <option value="notebook">Дэвтэр (notebook)</option>
-                            <option value="wallet">Түрүүвч (wallet - Color options active)</option>
+                            <option value="wallet">Түрүүвч (wallet - Өнгийн сонголттой)</option>
                             <option value="cassette">Кассет (cassette)</option>
                         </select>
                     </div>
@@ -240,7 +240,7 @@
                         <input type="number" id="admin-p-price" required placeholder="45000" class="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-roseAccent">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-stone-600 mb-1">Өнгийн зургууд (Хамгийн ихдээ 3 хүртэл өнгө сонгох)</label>
+                        <label class="block text-xs font-semibold text-stone-600 mb-1">Зургууд сонгох</label>
                         <input type="file" id="admin-p-files" accept="image/*" multiple class="w-full text-xs text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-roseAccent hover:file:bg-rose-100 bg-white border border-stone-200 rounded-xl p-1.5">
                     </div>
                 </div>
@@ -350,17 +350,32 @@
         let wishlist = [];
         let isAdminLoggedIn = localStorage.getItem('the1giftshop_admin') === 'true';
 
+        const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect width='300' height='300' fill='%23F5F2EC'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23888'%3EThe1GiftShop%3C/text%3E%3C/svg%3E";
+
         const defaultProducts = [
-            { id: 1, name: 'Kodak EC35 Butter Yellow Camera', category: 'camera', price: 95000, description: 'Сонгодог загварын винтаж камер.', images: ['camera-02.webp'] },
-            { id: 2, name: 'Sliding 4K Digital Camera', category: 'camera', price: 110000, description: 'Авсаархан 4K дижитал камер.', images: ['camera-01.webp'] },
-            { id: 3, name: 'iPod Classic Silver', category: 'mp3', price: 65000, description: 'Ретро загварын мөнгөлөг MP3 тоглуулагч.', images: ['mp3-01.jpg'] },
-            { id: 4, name: 'Digital Blue MP3 & FM Player', category: 'mp3', price: 55000, description: 'Цэнхэр өнгийн радио болон MP3 тоглуулагч.', images: ['mp3-02.webp'] },
-            { id: 5, name: 'Matin Kim Denim Shoulder Bag', category: 'bag', price: 85000, description: 'Загварлаг цүнх (Өнгийн сонголттой).', images: ['bag-01.jpg', '87c988a8d0b1753d721692cc25080c57.jpg', 'bag-02.webp'] },
-            { id: 6, name: 'Glossy Black Pocket Shoulder Bag', category: 'bag', price: 79000, description: 'Гялгар хар өнгийн өдөр тутмын цүнх.', images: ['87c988a8d0b1753d721692cc25080c57.jpg', 'bag-01.jpg'] },
-            { id: 7, name: 'Matin Kim Black Leather Bag', category: 'bag', price: 125000, description: 'Чанарын арьсан мөрний цүнх.', images: ['bag-02.webp', 'bag-01.jpg'] },
-            { id: 8, name: 'Star Charm Leather Notebook', category: 'notebook', price: 38000, description: 'Одтой зүүлт бүхий чамин арьсан тэмдэглэлийн дэвтэр.', images: ['notebook-01.jpg'] },
-            { id: 9, name: 'Dreamcatcher Card Wallet', category: 'wallet', price: 32000, description: 'Мөрөөдөгч сахиустай картын түрүүвч (Өнгийн сонголттой).', images: ['wallet-01.jpg', 'notebook-01.jpg'] },
-            { id: 10, name: 'Custom Mixtape Cassette', category: 'cassette', price: 25000, description: 'Өөрийн хүссэн дуугаа бичүүлэх боломжтой хоосон кассет.', images: ['camera-02.webp'] }
+            { id: 1, name: 'Kodak EC35 Butter Yellow Camera', category: 'camera', price: 95000, description: 'Сонгодог загварын винтаж камер.', colorVariants: [{ name: 'Yellow', colorCode: '#F4D03F', img: placeholderImg }] },
+            { id: 2, name: 'Sliding 4K Digital Camera', category: 'camera', price: 110000, description: 'Авсаархан 4K дижитал камер.', colorVariants: [{ name: 'Silver', colorCode: '#BDC3C7', img: placeholderImg }] },
+            { id: 3, name: 'iPod Classic Silver', category: 'mp3', price: 65000, description: 'Ретро загварын мөнгөлөг MP3 тоглуулагч.', colorVariants: [{ name: 'Silver', colorCode: '#BDC3C7', img: placeholderImg }] },
+            { id: 4, name: 'Digital Blue MP3 & FM Player', category: 'mp3', price: 55000, description: 'Цэнхэр өнгийн радио болон MP3 тоглуулагч.', colorVariants: [{ name: 'Blue', colorCode: '#3498DB', img: placeholderImg }] },
+            { id: 5, name: 'Matin Kim Denim Shoulder Bag', category: 'bag', price: 85000, description: 'Загварлаг цүнх (Өнгийн сонголттой).', colorVariants: [
+                { name: 'Night Sky', colorCode: '#2C3E50', img: placeholderImg },
+                { name: 'Denim Blue', colorCode: '#5DADE2', img: placeholderImg },
+                { name: 'Cream White', colorCode: '#FDFEFE', img: placeholderImg }
+            ]},
+            { id: 6, name: 'Glossy Black Pocket Shoulder Bag', category: 'bag', price: 79000, description: 'Гялгар хар өнгийн өдөр тутмын цүнх.', colorVariants: [
+                { name: 'Classic Black', colorCode: '#1C2833', img: placeholderImg },
+                { name: 'Pure White', colorCode: '#FFFFFF', img: placeholderImg }
+            ]},
+            { id: 7, name: 'Matin Kim Black Leather Bag', category: 'bag', price: 125000, description: 'Чанарын арьсан мөрний цүнх.', colorVariants: [
+                { name: 'Classic Black', colorCode: '#1C2833', img: placeholderImg },
+                { name: 'Burgundy Red', colorCode: '#800020', img: placeholderImg }
+            ]},
+            { id: 8, name: 'Star Charm Leather Notebook', category: 'notebook', price: 38000, description: 'Одтой зүүлт бүхий чамин арьсан тэмдэглэлийн дэвтэр[cite: 1].', colorVariants: [{ name: 'Burgundy', colorCode: '#800020', img: placeholderImg }] },
+            { id: 9, name: 'Dreamcatcher Card Wallet', category: 'wallet', price: 32000, description: 'Мөрөөдөгч сахиустай картын түрүүвч (Өнгийн сонголттой)[cite: 2].', colorVariants: [
+                { name: 'Night Sky', colorCode: '#2C3E50', img: placeholderImg },
+                { name: 'Warm Beige', colorCode: '#F5CBA7', img: placeholderImg }
+            ]},
+            { id: 10, name: 'Custom Mixtape Cassette', category: 'cassette', price: 25000, description: 'Өөрийн хүссэн дуугаа бичүүлэх боломжтой хоосон кассет.', colorVariants: [{ name: 'Clear', colorCode: '#E5E8E8', img: placeholderImg }] }
         ];
 
         let products = JSON.parse(localStorage.getItem('the1giftshop_products')) || defaultProducts;
@@ -389,12 +404,14 @@
             const grid = document.getElementById('product-grid');
             const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             
-            grid.innerHTML = filtered.map(p => `
+            grid.innerHTML = filtered.map(p => {
+                const mainImg = p.colorVariants[0].img;
+                return `
                 <div class="bg-white rounded-2xl p-4 border border-stone-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                     <div onclick="openProductDetail(${p.id})" class="cursor-pointer">
                         <div class="aspect-square rounded-xl overflow-hidden bg-stone-100 mb-4 relative">
-                            <img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300">
-                            ${(p.category === 'bag' || p.category === 'wallet') && p.images.length > 1 ? `<span class="absolute bottom-2 left-2 bg-roseAccent text-white text-[10px] px-2 py-0.5 rounded-full font-semibold">${p.images.length} өнгийн сонголттой</span>` : ''}
+                            <img src="${mainImg}" alt="${p.name}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300">
+                            ${p.colorVariants.length > 1 ? `<span class="absolute bottom-2 left-2 bg-roseAccent text-white text-[10px] px-2 py-0.5 rounded-full font-semibold">${p.colorVariants.length} өнгийн сонголттой</span>` : ''}
                             <button onclick="event.stopPropagation(); toggleWishlist(${p.id})" class="absolute top-3 right-3 bg-white/80 backdrop-blur-md p-2 rounded-full text-stone-600 hover:text-roseAccent shadow-sm">
                                 ♡
                             </button>
@@ -406,7 +423,7 @@
                         Сагсанд хийх 🛒
                     </button>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function filterProducts(category) {
@@ -419,55 +436,60 @@
             renderProducts(category);
         }
 
-        // Product Detail Modal with 3 Color Switcher Buttons for Bags & Wallets
+        // Apple-style Circular Color Switcher Modal
         function openProductDetail(id) {
             const p = products.find(prod => prod.id === id);
             if (!p) return;
 
-            const isColorSwappable = (p.category === 'bag' || p.category === 'wallet') && p.images.length > 1;
+            const activeColor = p.colorVariants[0];
 
             const content = document.getElementById('product-detail-content');
             content.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <div class="aspect-square rounded-2xl bg-stone-100 overflow-hidden mb-4 relative border border-stone-200">
-                            <img id="main-preview-img" src="${p.images[0]}" class="w-full h-full object-contain p-4">
-                        </div>
-                        ${isColorSwappable ? `
-                            <div>
-                                <label class="block text-xs font-semibold text-stone-500 mb-2">Өнгө сонгох:</label>
-                                <div class="flex space-x-3">
-                                    ${p.images.map((img, idx) => `
-                                        <button onclick="switchColorImage('${img}', this)" class="color-btn w-14 h-14 rounded-xl border-2 ${idx === 0 ? 'border-roseAccent bg-rose-50' : 'border-stone-200 bg-stone-50'} overflow-hidden flex-shrink-0 transition-all">
-                                            <img src="${img}" class="w-full h-full object-contain p-1">
-                                        </button>
-                                    `).join('')}
-                                </div>
+                <div class="flex flex-col items-center text-center">
+                    <!-- Main Image Display -->
+                    <div class="w-full max-w-md aspect-square rounded-3xl bg-stone-100 overflow-hidden mb-6 relative border border-stone-200">
+                        <img id="main-preview-img" src="${activeColor.img}" class="w-full h-full object-contain p-6 transition-all duration-300">
+                    </div>
+
+                    <!-- Apple Style Color Swatches -->
+                    ${p.colorVariants.length > 1 ? `
+                        <div class="mb-6 flex flex-col items-center">
+                            <div class="flex items-center space-x-3 mb-2">
+                                ${p.colorVariants.map((variant, idx) => `
+                                    <button onclick="selectColorSwatch('${variant.img}', '${variant.name}', this)" 
+                                            class="apple-color-swatch w-7 h-7 rounded-full border-2 ${idx === 0 ? 'ring-2 ring-stone-900 ring-offset-2 border-transparent' : 'border-stone-300'} shadow-sm transition-all focus:outline-none" 
+                                            style="background-color: ${variant.colorCode};" 
+                                            title="${variant.name}">
+                                    </button>
+                                `).join('')}
                             </div>
-                        ` : ''}
-                    </div>
-                    <div>
-                        <span class="text-xs uppercase font-bold text-roseAccent tracking-wider">${p.category}</span>
-                        <h3 class="text-2xl font-bold font-heading mt-1 mb-3">${p.name}</h3>
-                        <div class="text-2xl font-extrabold text-stone-900 mb-4">${p.price.toLocaleString()} ₮</div>
-                        <p class="text-stone-600 text-sm mb-6 leading-relaxed">${p.description || 'Тайлбар байхгүй байна.'}</p>
-                        <button onclick="addToCart(${p.id}); closeProductDetail();" class="w-full bg-roseAccent hover:bg-rose-600 text-white py-4 rounded-2xl font-semibold text-sm shadow-md transition-all">
-                            Сагсанд хийх 🛒
-                        </button>
-                    </div>
+                            <span id="selected-color-name" class="text-xs text-stone-500 font-medium">${activeColor.name}</span>
+                        </div>
+                    ` : ''}
+
+                    <span class="text-xs uppercase font-bold text-roseAccent tracking-wider">${p.category}</span>
+                    <h3 class="text-2xl font-bold font-heading mt-1 mb-2">${p.name}</h3>
+                    <div class="text-2xl font-extrabold text-stone-900 mb-4">${p.price.toLocaleString()} ₮</div>
+                    <p class="text-stone-600 text-sm max-w-md mb-6 leading-relaxed">${p.description || 'Тайлбар байхгүй байна.'}</p>
+                    <button onclick="addToCart(${p.id}); closeProductDetail();" class="w-full max-w-sm bg-roseAccent hover:bg-rose-600 text-white py-4 rounded-2xl font-semibold text-sm shadow-md transition-all">
+                        Сагсанд хийх 🛒
+                    </button>
                 </div>
             `;
             document.getElementById('product-detail-modal').classList.remove('hidden');
         }
 
-        function switchColorImage(imgSrc, btnElement) {
+        function selectColorSwatch(imgSrc, colorName, btnElement) {
             document.getElementById('main-preview-img').src = imgSrc;
-            document.querySelectorAll('.color-btn').forEach(btn => {
-                btn.classList.remove('border-roseAccent', 'bg-rose-50');
-                btn.classList.add('border-stone-200', 'bg-stone-50');
+            document.getElementById('selected-color-name').textContent = colorName;
+
+            document.querySelectorAll('.apple-color-swatch').forEach(swatch => {
+                swatch.classList.remove('ring-2', 'ring-stone-900', 'ring-offset-2', 'border-transparent');
+                swatch.classList.add('border-stone-300');
             });
-            btnElement.classList.remove('border-stone-200', 'bg-stone-50');
-            btnElement.classList.add('border-roseAccent', 'bg-rose-50');
+
+            btnElement.classList.remove('border-stone-300');
+            btnElement.classList.add('ring-2', 'ring-stone-900', 'ring-offset-2', 'border-transparent');
         }
 
         function closeProductDetail() {
@@ -497,7 +519,7 @@
             if (existing) {
                 existing.qty++;
             } else {
-                cart.push({ ...product, qty: 1, img: product.images[0] });
+                cart.push({ ...product, qty: 1, img: product.colorVariants[0].img });
             }
             updateCartUI();
             toggleCartDrawer();
@@ -608,7 +630,7 @@
             itemsEl.innerHTML = wishlist.length === 0 ? `<p class="text-stone-400 text-center text-sm py-12">Хадгалсан бараа байхгүй байна.</p>` :
                 wishlist.map(item => `
                     <div class="flex items-center space-x-4 bg-stone-50 p-3 rounded-xl border border-stone-100">
-                        <img src="${item.images[0]}" class="w-14 h-14 object-contain bg-white rounded-lg">
+                        <img src="${item.colorVariants[0].img}" class="w-14 h-14 object-contain bg-white rounded-lg">
                         <div>
                             <div class="font-semibold text-sm">${item.name}</div>
                             <div class="text-roseAccent text-xs font-bold">${item.price.toLocaleString()} ₮</div>
@@ -624,7 +646,7 @@
                 <div class="bg-white p-4 rounded-2xl border border-stone-200 text-sm mb-3">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center space-x-3">
-                            <img src="${p.images[0]}" class="w-12 h-12 object-contain bg-stone-50 rounded-lg">
+                            <img src="${p.colorVariants[0].img}" class="w-12 h-12 object-contain bg-stone-50 rounded-lg">
                             <div>
                                 <div class="font-semibold">${p.name}</div>
                                 <div class="text-xs text-roseAccent font-bold">${p.price.toLocaleString()} ₮ (${p.category})</div>
@@ -635,34 +657,29 @@
                             <button onclick="deleteProduct(${p.id})" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold">Устгах</button>
                         </div>
                     </div>
-                    <!-- Color stock management inside admin panel -->
-                    ${(p.category === 'bag' || p.category === 'wallet') ? `
-                        <div class="mt-3 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                            <span class="text-stone-500 font-medium">Өнгийн stock (${p.images.length}/3):</span>
-                            <div class="flex items-center space-x-2">
-                                ${p.images.map((img, idx) => `
-                                    <div class="relative w-8 h-8 rounded-lg border border-stone-200 overflow-hidden bg-stone-50 group">
-                                        <img src="${img}" class="w-full h-full object-contain">
-                                        <button onclick="removeProductColor(${p.id}, ${idx})" class="absolute inset-0 bg-red-600/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity font-bold text-[10px]" title="Энэ өнгийг устгах">✕</button>
-                                    </div>
-                                `).join('')}
-                                ${p.images.length < 3 ? `
-                                    <label class="w-8 h-8 rounded-lg border border-dashed border-roseAccent text-roseAccent flex items-center justify-center cursor-pointer hover:bg-rose-50 text-xs font-bold" title="Өнгө нэмэх">
-                                        +
-                                        <input type="file" accept="image/*" class="hidden" onchange="addProductColor(event, ${p.id})">
-                                    </label>
-                                ` : ''}
-                            </div>
+                    <!-- Color variant stock controls inside admin -->
+                    <div class="mt-3 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
+                        <span class="text-stone-500 font-medium">Өнгийн сонголтууд (${p.colorVariants.length}):</span>
+                        <div class="flex items-center space-x-2">
+                            ${p.colorVariants.map((v, idx) => `
+                                <div class="relative w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center group shadow-sm" style="background-color: ${v.colorCode};">
+                                    <button onclick="removeProductColor(${p.id},${idx})" class="absolute inset-0 bg-red-600/80 rounded-full text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity font-bold text-[10px]" title="${v.name} устгах">✕</button>
+                                </div>
+                            `).join('')}
+                            <label class="w-8 h-8 rounded-full border border-dashed border-roseAccent text-roseAccent flex items-center justify-center cursor-pointer hover:bg-rose-50 text-xs font-bold" title="Шинэ өнгө оруулах">
+                                +
+                                <input type="file" accept="image/*" class="hidden" onchange="addProductColorWithPrompt(event, ${p.id})">
+                            </label>
                         </div>
-                    ` : ''}
+                    </div>
                 </div>
             `).join('');
         }
 
         function removeProductColor(productId, colorIndex) {
             const p = products.find(prod => prod.id === productId);
-            if (p && p.images.length > 1) {
-                p.images.splice(colorIndex, 1);
+            if (p && p.colorVariants.length > 1) {
+                p.colorVariants.splice(colorIndex, 1);
                 localStorage.setItem('the1giftshop_products', JSON.stringify(products));
                 renderProducts('all');
                 renderAdminProductList();
@@ -671,14 +688,23 @@
             }
         }
 
-        function addProductColor(event, productId) {
+        function addProductColorWithPrompt(event, productId) {
             const file = event.target.files[0];
             if (file) {
+                const colorName = prompt("Өнгийн нэрийг оруулна уу (жишээ нь: Night Sky, Burgundy, Silver):", "New Color");
+                if (!colorName) return;
+                
+                const hexCode = prompt("Өнгийн кодоо оруулна уу (Hex code, жишээ нь: #2C3E50, #800020, #000000):", "#2C3E50") || "#2C3E50";
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const p = products.find(prod => prod.id === productId);
-                    if (p && p.images.length < 3) {
-                        p.images.push(e.target.result);
+                    if (p) {
+                        p.colorVariants.push({
+                            name: colorName,
+                            colorCode: hexCode,
+                            img: e.target.result
+                        });
                         localStorage.setItem('the1giftshop_products', JSON.stringify(products));
                         renderProducts('all');
                         renderAdminProductList();
@@ -715,7 +741,7 @@
             const description = document.getElementById('admin-p-desc').value;
             const fileInput = document.getElementById('admin-p-files');
 
-            const processImagesAndSave = (imageArray) => {
+            const processImagesAndSave = (colorVariants) => {
                 if (editId) {
                     const p = products.find(prod => prod.id == editId);
                     if (p) {
@@ -723,8 +749,8 @@
                         p.category = category;
                         p.price = price;
                         p.description = description;
-                        if (imageArray.length > 0) {
-                            p.images = imageArray;
+                        if (colorVariants.length > 0) {
+                            p.colorVariants = colorVariants;
                         }
                     }
                 } else {
@@ -734,7 +760,7 @@
                         category,
                         price,
                         description,
-                        images: imageArray.length > 0 ? imageArray : ['camera-01.webp']
+                        colorVariants: colorVariants.length > 0 ? colorVariants : [{ name: 'Default', colorCode: '#2C3E50', img: placeholderImg }]
                     };
                     products.push(newProduct);
                 }
@@ -748,13 +774,17 @@
 
             if (fileInput.files && fileInput.files.length > 0) {
                 let readers = [];
-                let uploadedImages = [];
+                let newVariants = [];
 
-                Array.from(fileInput.files).slice(0, 3).forEach(file => {
+                Array.from(fileInput.files).forEach((file, idx) => {
                     readers.push(new Promise((resolve) => {
                         const reader = new FileReader();
                         reader.onload = (e) => {
-                            uploadedImages.push(e.target.result);
+                            newVariants.push({
+                                name: `Option ${idx + 1}`,
+                                colorCode: idx === 0 ? '#2C3E50' : (idx === 1 ? '#800020' : '#BDC3C7'),
+                                img: e.target.result
+                            });
                             resolve();
                         };
                         reader.readAsDataURL(file);
@@ -762,14 +792,14 @@
                 });
 
                 Promise.all(readers).then(() => {
-                    processImagesAndSave(uploadedImages);
+                    processImagesAndSave(newVariants);
                 });
             } else {
                 if (editId) {
                     const p = products.find(prod => prod.id == editId);
-                    processImagesAndSave(p ? p.images : []);
+                    processImagesAndSave(p ? p.colorVariants : []);
                 } else {
-                    processImagesAndSave(['camera-01.webp']);
+                    processImagesAndSave([{ name: 'Default', colorCode: '#2C3E50', img: placeholderImg }]);
                 }
             }
         }
